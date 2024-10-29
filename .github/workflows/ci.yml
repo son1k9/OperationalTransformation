@@ -1,0 +1,27 @@
+name: Build and test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build project
+        run: dotnet build OperationalTransformation/OperationalTransformation.csproj
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Run tests
+        run: dotnet test OperationalTransformation.Test/OperationalTransformation.Test.csproj
