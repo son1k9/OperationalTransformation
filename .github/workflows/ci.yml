@@ -1,4 +1,4 @@
-name: Build and test
+name: Build, test and analyze
 on: [push]
 jobs:
   build:
@@ -28,3 +28,14 @@ jobs:
           dotnet-version: 8.x
       - name: Run tests
         run: dotnet test OperationalTransformation.Test/OperationalTransformation.Test.csproj --configuration ${{ matrix.configuration }}
+
+  analyze:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Run code analysis
+        run: dotnet tool install -g dotnet-format && dotnet format OperationalTransformation/OperationalTransformation.csproj
+
+
