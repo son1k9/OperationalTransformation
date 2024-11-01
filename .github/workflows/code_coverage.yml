@@ -1,0 +1,34 @@
+name: Build Release, test and generate code coverage report
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - name: Build project
+        run: dotnet build OperationalTransformation/OperationalTransformation.csproj --configuration Release
+
+  test:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - name: Run tests and generate code coverage report
+        uses: b3b00/coverlet-action@1.2.5
+        with:
+          testProject: 'OperationalTransformation.Test/OperationalTransformation.Test.csproj'
+          output: 'code_coverage.xml'
+          outputFormat: 'cobertura'
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage
+          path: code_coverage.xml
