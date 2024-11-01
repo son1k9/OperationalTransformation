@@ -29,8 +29,8 @@ jobs:
       - name: Run tests and generate code coverage report
         uses: b3b00/coverlet-action@1.2.5
         with:
-          testProject: 'OperationalTransformation.Test.csproj'
-          output: 'OperationalTransformation.Test/code_coverage.xml'
+          testProject: 'OperationalTransformation/OperationalTransformation.Test.csproj'
+          output: 'code_coverage.xml'
           outputFormat: 'cobertura'
 #      - name: Upload artifact
 #       uses: actions/upload-artifact@v4
