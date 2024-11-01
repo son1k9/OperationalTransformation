@@ -27,13 +27,11 @@ jobs:
         with:
           dotnet-version: 8.x
       - name: Run tests and generate code coverage report
-        uses: b3b00/coverlet-action@1.2.5
+        run: |
+          dotnet test OperationalTransformation.Test/OperationalTransformation.Test.csproj --collect:"XPlat Code Coverage"
+          find . -name coverage.cobertura.xml -exec mv {} code_coverage.xml \;        
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          testProject: 'OperationalTransformation.Test/OperationalTransformation.Test.csproj'
-          output: 'OperationalTransformation.Test/code_coverage.xml'
-          outputFormat: 'cobertura'
-#      - name: Upload artifact
-#       uses: actions/upload-artifact@v4
-#        with:
-#          name: code-coverage
-#          path: code_coverage.xml
+          name: code-coverage
+          path: code_coverage.xml
