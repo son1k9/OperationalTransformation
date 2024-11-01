@@ -16,6 +16,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      configuraiton: [Debug, Release]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,4 +26,4 @@ jobs:
         with:
           dotnet-version: 8.x
       - name: Run tests
-        run: dotnet test OperationalTransformation.Test/OperationalTransformation.Test.csproj
+        run: dotnet test OperationalTransformation.Test/OperationalTransformation.Test.csproj --configuration ${{ matrix.configuration }}
