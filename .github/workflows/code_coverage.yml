@@ -17,6 +17,7 @@ jobs:
         run: dotnet build OperationalTransformation/OperationalTransformation.csproj --configuration Release
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -28,11 +29,11 @@ jobs:
       - name: Run tests and generate code coverage report
         uses: b3b00/coverlet-action@1.2.5
         with:
-          testProject: 'OperationalTransformation.Test/OperationalTransformation.Test.csproj'
+          testProject: 'OperationalTransformation.Test.csproj'
           output: 'OperationalTransformation.Test/code_coverage.xml'
           outputFormat: 'cobertura'
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage
-          path: code_coverage.xml
+#      - name: Upload artifact
+#       uses: actions/upload-artifact@v4
+#        with:
+#          name: code-coverage
+#          path: code_coverage.xml
