@@ -30,7 +30,7 @@ jobs:
         uses: b3b00/coverlet-action@1.2.5
         with:
           testProject: 'OperationalTransformation.Test/OperationalTransformation.Test.csproj'
-          output: 'code_coverage.xml'
+          output: 'OperationalTransformation.Test/code_coverage.xml'
           outputFormat: 'cobertura'
 #      - name: Upload artifact
 #       uses: actions/upload-artifact@v4
