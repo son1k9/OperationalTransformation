@@ -20,5 +20,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: artifact
+          name: ${{ matrix.configuration }}
           path: OperationalTransformation/bin/${{ matrix.configuration }}/net8.0
