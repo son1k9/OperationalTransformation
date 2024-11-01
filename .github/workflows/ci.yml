@@ -17,7 +17,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     strategy:
-      configuration: [Debug, Release]
+      matrix:
+        configuration: [Debug, Release]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
