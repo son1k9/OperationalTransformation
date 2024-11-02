@@ -1,4 +1,4 @@
-name: Test with different .NET
+name: Build, test and analyze
 on: [push]
 jobs:
   build:
